@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.60.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassRoomSpace.Domain\ClassRoomSpace.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
