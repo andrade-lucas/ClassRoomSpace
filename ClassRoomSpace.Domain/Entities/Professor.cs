@@ -13,14 +13,34 @@ namespace ClassRoomSpace.Domain.Entities
         public string Phone { get; private set; }
         public EProfessorStatus Status { get; private set; }
         
-        public Professor(Name name, Document document, Email email, Course course, string phone, EProfessorStatus status)
+        public Professor(Name name, Document document, Email email, Course course, string phone)
         {
             Name = name;
             Document = document;
             Email = email;
             Course = course;
             Phone = phone;
-            Status = status;
+            Status = EProfessorStatus.Active;
+
+            AddNotifications(Name.Notifications);
+            AddNotifications(Document.Notifications);            
+            AddNotifications(Email.Notifications);            
+            AddNotifications(Course.Notifications);          
+        }
+
+        public void Inactivate()
+        {
+            Status = EProfessorStatus.Inactive;
+        }
+
+        public void Activate()
+        {
+            Status = EProfessorStatus.Active;
+        }
+
+        public override string ToString()
+        {
+            return Name.ToString();
         }
     }
 }

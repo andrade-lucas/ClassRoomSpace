@@ -1,3 +1,4 @@
+using System;
 using ClassRoomSpace.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -24,6 +25,13 @@ namespace ClassRoomSpace.Tests.Entities
         public void ShouldReturnValidWhenCourseValid()
         {
             var course = new Course("Computer Science");
+            Assert.AreEqual(true, course.IsValid);
+        }
+
+        [TestMethod]
+        public void ShouldCreateAValidCourseWithJustId()
+        {
+            var course = new Course(Guid.NewGuid());
             Assert.AreEqual(true, course.IsValid);
         }
     }
