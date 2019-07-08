@@ -13,6 +13,7 @@ namespace ClassRoomSpace.Domain.Repositories
         bool EmailExists(string email);
         void Create(User user);
         void Edit(EditUserCommand command);
+        AuthUserQuery Login(AuthUserCommand command);
         void Delete(Guid id);
     }
 }

@@ -100,5 +100,18 @@ namespace ClassRoomSpace.Infra.Repositories
                 commandType: CommandType.StoredProcedure
             ).FirstOrDefault();
         }
+
+        public AuthUserQuery Login(AuthUserCommand command)
+        {
+            return _db.Connection().Query<AuthUserQuery>(
+                "spAuthUser",
+                new 
+                {
+                    email = command.Email,
+                    password = command.Password
+                },
+                commandType: CommandType.StoredProcedure
+            ).FirstOrDefault();
+        }
     }
 }

@@ -5,11 +5,12 @@ using ClassRoomSpace.Shared.Commands;
 using ClassRoomSpace.Domain.Repositories;
 using FluentValidator;
 using ClassRoomSpace.Domain.Commands.Outputs;
+using ClassRoomSpace.Domain.Queries.User;
 
 namespace ClassRoomSpace.Domain.Commands.Handlers
 {
     public class UserHandler : Notifiable, ICommandHandler<CreateUserCommand>,
-        ICommandHandler<EditUserCommand>, ICommandHandler<DeleteUserCommand>
+        ICommandHandler<EditUserCommand>, ICommandHandler<DeleteUserCommand>, ICommandHandler<AuthUserCommand>
     {
         private readonly IUserRepository _repository;
 
@@ -69,6 +70,21 @@ namespace ClassRoomSpace.Domain.Commands.Handlers
 
             _repository.Delete(command.Id);
             return new CommandResult(true, "Usuário deletado com sucesso", null);
+        }
+
+        public ICommandResult Handle(AuthUserCommand command)
+        {
+            var email = new Email(command.Email);
+            var password = new Password(command.Password);
+
+            AddNotifications(email.Notifications);
+            AddNotifications(password.Notifications);
+
+            if (Invalid)
+                return new CommandResult(false, "Verifique se todos os campos estão corretos", Notifications);
+
+            var result = _repository.Login(command);
+            return new CommandResult(true, "Seja bem vindo", result);
         }
     }
 }

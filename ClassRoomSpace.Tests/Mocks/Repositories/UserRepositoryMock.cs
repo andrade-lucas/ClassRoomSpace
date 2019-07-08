@@ -36,5 +36,10 @@ namespace ClassRoomSpace.Tests.Mocks.Repositories
         {
             return null;
         }
+
+        public AuthUserQuery Login(AuthUserCommand command)
+        {
+            return null;
+        }
     }
 }
