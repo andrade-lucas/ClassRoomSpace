@@ -62,7 +62,9 @@ namespace ClassRoomSpace.Infra.Repositories
                     firstName = command.FirstName,
                     lastName = command.LastName,
                     document = command.Document,
-                    phone = command.Phone
+                    phone = command.Phone,
+                    status = command.Status,
+                    image = command.Image
                 },
                 commandType: CommandType.StoredProcedure
             );

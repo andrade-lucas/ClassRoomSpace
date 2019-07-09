@@ -12,5 +12,6 @@ namespace ClassRoomSpace.Domain.Queries.User
         public string Email { get; set; }
         public string Phone { get; set; }
         public EUserStatus Status { get; set; }
+        public string Image { get; set; }
     }
 }
