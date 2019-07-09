@@ -60,18 +60,6 @@ namespace ClassRoomSpace.Domain.Commands.Handlers
             return new CommandResult(true, "Usuário editado com sucesso", null);
         }
 
-        public ICommandResult Handle(DeleteUserCommand command)
-        {
-            if (command.Id == null)
-                AddNotification("Id", "Identificador não encontrado");
-
-            if (Invalid)
-                return new CommandResult(false, "Erro ao deletar usuário", Notifications);
-
-            _repository.Delete(command.Id);
-            return new CommandResult(true, "Usuário deletado com sucesso", null);
-        }
-
         public ICommandResult Handle(AuthUserCommand command)
         {
             var email = new Email(command.Email);
@@ -85,6 +73,19 @@ namespace ClassRoomSpace.Domain.Commands.Handlers
 
             var result = _repository.Login(command);
             return new CommandResult(true, "Seja bem vindo", result);
+        }
+
+        public ICommandResult Handle(DeleteUserCommand command)
+        {
+            string id = command.Id.ToString();
+            if (string.IsNullOrEmpty(id))
+                AddNotification("Id", "Identificador inválido");
+
+            if (Invalid)
+                return new CommandResult(false, "Erro ao deletar usuário", Notifications);
+            
+            _repository.Delete(command);
+            return new CommandResult(true, "Usuário deletado com sucesso", null);
         }
     }
 }

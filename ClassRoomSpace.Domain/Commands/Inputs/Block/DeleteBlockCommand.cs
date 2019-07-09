@@ -1,9 +1,10 @@
+using System;
 using ClassRoomSpace.Shared.Commands;
 
 namespace ClassRoomSpace.Domain.Commands.Inputs.Block
 {
-    public class CreateBlockCommand : ICommand
+    public class DeleteBlockCommand : ICommand
     {
-        public string Description { get; set; }
+        public Guid Id { get; set; }
     }
 }

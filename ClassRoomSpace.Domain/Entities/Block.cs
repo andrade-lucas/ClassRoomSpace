@@ -1,9 +1,9 @@
-using FluentValidator;
+using ClassRoomSpace.Shared.Entities;
 using FluentValidator.Validation;
 
 namespace ClassRoomSpace.Domain.Entities
 {
-    public class Block : Notifiable
+    public class Block : Entity
     {
         public string Description { get; private set; }
 

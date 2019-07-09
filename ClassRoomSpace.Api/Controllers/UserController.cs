@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ClassRoomSpace.Api.Controllers
 {
-    public class UserController : Controller
+    public class UsersController : Controller
     {
         private readonly IUserRepository _repository;
         private readonly UserHandler _handler;
 
-        public UserController(IUserRepository repository)
+        public UsersController(IUserRepository repository)
         {
             _repository = repository;
             _handler = new UserHandler(_repository);
@@ -37,6 +37,20 @@ namespace ClassRoomSpace.Api.Controllers
         [HttpPost]
         [Route("v1/users")]
         public ICommandResult Post([FromBody] CreateUserCommand command)
+        {
+            return _handler.Handle(command);
+        }
+
+        [HttpPut]
+        [Route("v1/users")]
+        public ICommandResult Put([FromBody] EditUserCommand command)
+        {
+            return _handler.Handle(command);
+        }
+
+        [HttpDelete]
+        [Route("v1/users/{id}")]
+        public ICommandResult Delete(DeleteUserCommand command)
         {
             return _handler.Handle(command);
         }

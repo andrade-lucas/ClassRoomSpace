@@ -1,5 +1,5 @@
 using ClassRoomSpace.Domain.Commands.Handlers;
-using ClassRoomSpace.Domain.Commands.Inputs;
+using ClassRoomSpace.Domain.Commands.Inputs.Block;
 using ClassRoomSpace.Tests.Mocks.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

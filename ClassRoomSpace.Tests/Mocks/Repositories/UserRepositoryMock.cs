@@ -13,9 +13,9 @@ namespace ClassRoomSpace.Tests.Mocks.Repositories
         {
         }
 
-        public void Delete(Guid id)
+        public void Delete(DeleteUserCommand command)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Edit(EditUserCommand command)

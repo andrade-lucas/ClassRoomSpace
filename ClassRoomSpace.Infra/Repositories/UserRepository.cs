@@ -40,13 +40,13 @@ namespace ClassRoomSpace.Infra.Repositories
             );
         }
 
-        public void Delete(Guid id)
+        public void Delete(DeleteUserCommand command)
         {
             _db.Connection().Execute(
                 "spDeleteUser",
                 new 
                 {
-                    id = id
+                    id = command.Id
                 },
                 commandType: CommandType.StoredProcedure
             );

@@ -14,6 +14,6 @@ namespace ClassRoomSpace.Domain.Repositories
         void Create(User user);
         void Edit(EditUserCommand command);
         AuthUserQuery Login(AuthUserCommand command);
-        void Delete(Guid id);
+        void Delete(DeleteUserCommand command);
     }
 }
