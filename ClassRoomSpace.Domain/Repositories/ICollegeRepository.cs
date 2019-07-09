@@ -10,7 +10,7 @@ namespace ClassRoomSpace.Domain.Repositories
     {
         IEnumerable<GetCollegesQuery> Get();
         GetCollegeByIdQuery GetById(Guid id);
-        void Create(College command);
+        void Create(College college);
         void Edit(EditCollegeCommand command);
         void Delete(DeleteCollegeCommand command);
     }

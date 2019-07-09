@@ -1,6 +1,8 @@
 ﻿using ClassRoomSpace.Domain.Repositories;
+using ClassRoomSpace.Domain.Services;
 using ClassRoomSpace.Infra.Context;
 using ClassRoomSpace.Infra.Repositories;
+using ClassRoomSpace.Infra.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,9 +17,12 @@ namespace ClassRoomSpace.Api
         {
             services.AddResponseCompression();
             services.AddMvc();
+
             services.AddScoped<IDB, MsSqlDb>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IBlockRepository, BlockRepository>();
+            services.AddTransient<ICollegeRepository, CollegeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
