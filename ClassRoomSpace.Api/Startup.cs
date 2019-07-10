@@ -23,6 +23,7 @@ namespace ClassRoomSpace.Api
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IBlockRepository, BlockRepository>();
             services.AddTransient<ICollegeRepository, CollegeRepository>();
+            services.AddTransient<ICourseRepository, CourseRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
