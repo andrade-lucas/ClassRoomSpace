@@ -56,20 +56,6 @@ namespace ClassRoomSpace.Infra.Repositories
                     commandType: CommandType.StoredProcedure
                 );
             }
-
-            foreach (var block in college.Blocks)
-            {
-                _db.Connection().Execute(
-                    "spCreateBlock",
-                    new
-                    {
-                        id = block.Id,
-                        description = block.Description,
-                        idCollege = college.Id
-                    },
-                    commandType: CommandType.StoredProcedure
-                );
-            }
         }
 
         public void Delete(DeleteCollegeCommand command)
@@ -114,7 +100,7 @@ namespace ClassRoomSpace.Infra.Repositories
         public GetCollegeByIdQuery GetById(Guid id)
         {
             return _db.Connection().Query<GetCollegeByIdQuery>(
-                "spGetUserById",
+                "spGetCollegeById",
                 new 
                 {
                     id = id

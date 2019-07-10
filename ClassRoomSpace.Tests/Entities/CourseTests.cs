@@ -27,12 +27,5 @@ namespace ClassRoomSpace.Tests.Entities
             var course = new Course("Computer Science");
             Assert.AreEqual(true, course.IsValid);
         }
-
-        [TestMethod]
-        public void ShouldCreateAValidCourseWithJustId()
-        {
-            var course = new Course(Guid.NewGuid());
-            Assert.AreEqual(true, course.IsValid);
-        }
     }
 }

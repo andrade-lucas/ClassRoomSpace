@@ -5,6 +5,7 @@ namespace ClassRoomSpace.Domain.Commands.Inputs.Professor
 {
     public class CreateProfessorCommand : ICommand
     {
+        public Guid Id = Guid.NewGuid();
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Document { get; set; }

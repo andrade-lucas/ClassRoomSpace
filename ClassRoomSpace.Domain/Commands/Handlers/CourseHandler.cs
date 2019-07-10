@@ -4,11 +4,11 @@ using ClassRoomSpace.Domain.Entities;
 using ClassRoomSpace.Domain.Repositories;
 using ClassRoomSpace.Shared.Commands;
 using FluentValidator;
-using FluentValidator.Validation;
 
 namespace ClassRoomSpace.Domain.Commands.Handlers
 {
-    public class CourseHandler : Notifiable, ICommandHandler<CreateCourseCommand>
+    public class CourseHandler : Notifiable, ICommandHandler<CreateCourseCommand>,
+        ICommandHandler<EditCourseCommand>, ICommandHandler<DeleteCourseCommand>
     {
         private readonly ICourseRepository _repository;
 
@@ -25,8 +25,32 @@ namespace ClassRoomSpace.Domain.Commands.Handlers
             if (Invalid)
                 return new CommandResult(false, "Erro ao cadastrar curso", Notifications);
             
-            _repository.Create(course);
+            _repository.Create(command);
             return new CommandResult(true, "Curso cadastrado com sucesso", null);
+        }
+
+        public ICommandResult Handle(EditCourseCommand command)
+        {
+            var course = new Course(command.Description);
+
+            if (Invalid)
+                return new CommandResult(false, "Erro ao editar o curso", Notifications);
+            
+            _repository.Edit(command);
+            return new CommandResult(true, "Curso editado com sucesso", null);
+        }
+
+        public ICommandResult Handle(DeleteCourseCommand command)
+        {
+            string id = command.Id.ToString();
+            if (string.IsNullOrEmpty(id))
+                AddNotification("Id", "Identificador inválido");
+
+            if (Invalid)
+                return new CommandResult(false, "Erro ao deletar curso", Notifications);
+            
+            _repository.Delete(command);
+            return new CommandResult(true, "Curso deletado com sucesso", null);
         }
     }
 }
