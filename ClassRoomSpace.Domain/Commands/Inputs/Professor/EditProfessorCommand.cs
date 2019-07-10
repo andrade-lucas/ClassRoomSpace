@@ -4,9 +4,9 @@ using ClassRoomSpace.Shared.Commands;
 
 namespace ClassRoomSpace.Domain.Commands.Inputs.Professor
 {
-    public class CreateProfessorCommand : ICommand
+    public class EditProfessorCommand : ICommand
     {
-        public Guid Id = Guid.NewGuid();
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Document { get; set; }
