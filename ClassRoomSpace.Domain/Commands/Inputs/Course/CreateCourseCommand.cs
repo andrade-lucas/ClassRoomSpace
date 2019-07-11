@@ -7,6 +7,6 @@ namespace ClassRoomSpace.Domain.Commands.Inputs.Course
     {
         public Guid Id = Guid.NewGuid();
         public string Description { get; set; }
-        public string IdCollege { get; set; }
+        public Guid IdCollege { get; set; }
     }
 }

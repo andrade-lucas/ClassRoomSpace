@@ -31,21 +31,61 @@ namespace ClassRoomSpace.Tests.Commands.Handlers
             _invalidCreateCommand.Email = "example.com";
             _invalidCreateCommand.IdCourse = Guid.NewGuid();
             _invalidCreateCommand.Phone = "";
-            
+
             _handler = new ProfessorHandler(new ProfessorRepositoryMock(), new EmailServiceMock());
         }
 
         [TestMethod]
-        public void ShouldReturnInvalidWhenInvalid()
+        public void ShouldReturnInvalidWhenCreateCommandInvalid()
         {
             var result = _handler.Handle(_invalidCreateCommand);
             Assert.AreEqual(false, result.Status);
         }
 
         [TestMethod]
-        public void ShouldReturnValidWhenValid()
+        public void ShouldReturnValidWhenCreateCommandValid()
         {
             var result = _handler.Handle(_validCreateCommand);
+            Assert.AreEqual(true, result.Status);
+        }
+
+        [TestMethod]
+        public void ShouldReturnInvalidWhenEditCommandInvalid()
+        {
+            var command = new EditProfessorCommand();
+            command.Id = Guid.NewGuid();
+            command.FirstName = "";
+            command.LastName = "";
+            command.Document = "402.020.-44";
+            command.Email = "example.com";
+            command.IdCourse = Guid.NewGuid();
+            var handler = new ProfessorHandler(new ProfessorRepositoryMock(), new EmailServiceMock());
+            var result = handler.Handle(command);
+            Assert.AreNotEqual(true, result.Status);
+        }
+
+        [TestMethod]
+        public void ShouldReturnValidWhenEditCommandIsValid()
+        {
+            var command = new EditProfessorCommand();
+            command.Id = Guid.NewGuid();
+            command.FirstName = "FirstName";
+            command.LastName = "LastName";
+            command.Document = "402.020.980-44";
+            command.Email = "example@example.com";
+            command.IdCourse = Guid.NewGuid();
+            var handler = new ProfessorHandler(new ProfessorRepositoryMock(), new EmailServiceMock());
+            var result = handler.Handle(command);
+            Assert.AreEqual(true, result.Status);
+        }
+
+        [TestMethod]
+        public void ShouldReturnValidWhenDeleteCommandIsValid()
+        {
+            var command = new DeleteProfessorCommand();
+            command.Id = Guid.NewGuid();
+            var handler = new ProfessorHandler(new ProfessorRepositoryMock(), new EmailServiceMock());
+            var result = handler.Handle(command);
             Assert.AreEqual(true, result.Status);
         }
     }

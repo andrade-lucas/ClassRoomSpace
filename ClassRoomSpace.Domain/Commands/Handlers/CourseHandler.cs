@@ -32,6 +32,7 @@ namespace ClassRoomSpace.Domain.Commands.Handlers
         public ICommandResult Handle(EditCourseCommand command)
         {
             var course = new Course(command.Description);
+            AddNotifications(course.Notifications);
 
             if (Invalid)
                 return new CommandResult(false, "Erro ao editar o curso", Notifications);

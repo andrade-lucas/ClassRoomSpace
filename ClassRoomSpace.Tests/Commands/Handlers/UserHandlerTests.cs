@@ -40,5 +40,15 @@ namespace ClassRoomSpace.Tests.Commands.Handlers
             var result = handler.Handle(command);
             Assert.AreEqual(true, result.Status);
         }
+
+        [TestMethod]
+        public void ShouldReturnValidWhenDeleteCommandValid()
+        {
+            var command = new DeleteUserCommand();
+            command.Id = Guid.NewGuid();
+            var handler = new UserHandler(new UserRepositoryMock());
+            var result = handler.Handle(command);
+            Assert.AreEqual(true, result.Status);
+        }
     }
 }
