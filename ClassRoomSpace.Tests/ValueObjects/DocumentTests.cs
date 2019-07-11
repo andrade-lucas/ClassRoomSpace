@@ -33,5 +33,19 @@ namespace ClassRoomSpace.Tests.ValueObjects
             var doc = new Document("12345678912309");
             Assert.AreEqual(false, doc.IsValid);
         }
+
+        [TestMethod]
+        public void ShouldReturnInvalidWhenCnpjInvalid()
+        {
+            var document = new Document("12.345.678/9012-34");
+            Assert.AreNotEqual(true, document.IsValid);
+        }
+
+        [TestMethod]
+        public void ShouldReturnValidWhenCnpjIsValid()
+        {
+            var document = new Document("47.994.486/0001-94");
+            Assert.AreEqual(true, document.IsValid);
+        }
     }
 }

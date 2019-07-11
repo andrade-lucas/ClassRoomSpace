@@ -1,4 +1,5 @@
 using ClassRoomSpace.Shared.Entities;
+using FluentValidator.Validation;
 
 namespace ClassRoomSpace.Domain.Entities
 {
@@ -14,13 +15,22 @@ namespace ClassRoomSpace.Domain.Entities
         
         public Address(string street, string number, string zipCode, string district, string city, string state, string country)
         {
-            Street = street;
-            Number = number;
+            Street = street ?? "";
+            Number = number ?? "";
             ZipCode = zipCode;
             District = district;
-            City = city;
-            State = state;
-            Country = country;
+            City = city ?? "";
+            State = state ?? "";
+            Country = country ?? "";
+
+            AddNotifications(new ValidationContract()
+                .HasMinLen(Street, 3, "Street", "O campo deve ter pelo menos 3 caracteres")
+                .HasMinLen(City, 3, "City", "O campo deve ter pelo menos 3 caracteres")
+                .HasLen(State, 2, "State", "O campo deve ter 2 caracteres")
+                .HasMinLen(country, 2, "country", "O campo deve ter pelo menos 2 caracteres")
+                .HasMaxLen(City, 60, "City", "O campo deve ter no máximo 60 caracteres")
+                .HasMaxLen(Country, 60, "Country", "O campo deve ter no máximo 60 caracteres")
+            );
         }
     }
 }
