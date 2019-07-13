@@ -1,9 +1,11 @@
 using System;
+using ClassRoomSpace.Domain.Enums;
 
-namespace ClassRoomSpace.Domain.Commands.Inputs.ClassRoom
+namespace ClassRoomSpace.Domain.Queries.ClassRoom
 {
-    public class CreateClassRoomCommand : ICommand
+    public class GetClassRoomByIdQuery
     {
+        public Guid Id { get; set; }
         public string Description { get; set; }
         public bool Status { get; set; }
         public EClassRoomType Type { get; set; }
