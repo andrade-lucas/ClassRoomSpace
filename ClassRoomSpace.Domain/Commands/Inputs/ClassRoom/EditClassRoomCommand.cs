@@ -8,7 +8,7 @@ namespace ClassRoomSpace.Domain.Commands.Inputs.ClassRoom
     {
         public Guid Id { get; set; }
         public string Description { get; set; }
-        public bool Status { get; set; }
+        public EClassRoomStatus Status { get; set; }
         public EClassRoomType Type { get; set; }
         public Guid IdBlock { get; set; }
     }

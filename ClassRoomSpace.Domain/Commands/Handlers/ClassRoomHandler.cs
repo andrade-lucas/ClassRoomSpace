@@ -31,12 +31,27 @@ namespace ClassRoomSpace.Domain.Commands.Handlers
 
         public ICommandResult Handle(EditClassRoomCommand command)
         {
-            throw new NotImplementedException();
+            var classRoom = new ClassRoom(command.Description, command.Status, command.Type);
+            AddNotifications(classRoom.Notifications);
+
+            if (Invalid)
+                return new CommandResult(false, "Erro ao editar sala", Notifications);
+
+            _repository.Edit(command);
+            return new CommandResult(true, "Sala editada com sucesso", null);
         }
 
         public ICommandResult Handle(DeleteClassRoomCommand command)
         {
-            throw new NotImplementedException();
+            string id = command.Id.ToString();
+            if (string.IsNullOrEmpty(id))
+                AddNotification("Id", "Identificador inválido");
+
+            if (Invalid)
+                return new CommandResult(false, "Erro ao deletar sala", Notifications);
+            
+            _repository.Delete(command);
+            return new CommandResult(true, "Sala deletada com sucesso", null);
         }
     }
 }
