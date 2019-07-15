@@ -15,5 +15,16 @@ namespace ClassRoomSpace.Domain.Entities
             Status = status;
             Type = type;
         }
+
+        public void Book()
+        {
+            if (Status == EClassRoomStatus.Free)
+                Status = EClassRoomStatus.Reserved;
+        }
+
+        public override string ToString()
+        {
+            return Description;
+        }
     }
 }
