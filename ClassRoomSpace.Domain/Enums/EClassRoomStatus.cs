@@ -4,6 +4,6 @@
     {
         Free = 0,
         Reserved = 1,
-        unavailable = 2
+        Unavailable = 2
     }
 }
