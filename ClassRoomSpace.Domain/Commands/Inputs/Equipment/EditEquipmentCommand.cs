@@ -10,5 +10,6 @@ namespace ClassRoomSpace.Domain.Commands.Inputs.Equipment
         public string Description { get; set; }
         public EEquipmentStatus Status { get; set; }
         public DateTime PurchaseDate { get; set; }
+        public Guid IdCollege { get; set; }
     }
 }
