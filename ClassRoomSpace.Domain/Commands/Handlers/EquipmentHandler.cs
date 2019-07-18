@@ -19,7 +19,7 @@ namespace ClassRoomSpace.Domain.Commands.Handlers
 
         public ICommandResult Handle(CreateEquipmentCommand command)
         {
-            var equipment = new Equipment(command.Description, command.PurchaseDate);
+            var equipment = new Equipment(command.Description);
             AddNotifications(equipment.Notifications);
             if (Invalid)
                 return new CommandResult(false, "Ocorreu um erro ao criar equipamento", Notifications);
@@ -30,7 +30,14 @@ namespace ClassRoomSpace.Domain.Commands.Handlers
 
         public ICommandResult Handle(EditEquipmentCommand command)
         {
-            throw new System.NotImplementedException();
+            var equipment = new Equipment(command.Description);
+            AddNotifications(equipment.Notifications);
+
+            if (Invalid)
+                return new CommandResult(false, "Erro ao editar registro", Notifications);
+            
+            _repository.Edit(command);
+            return new CommandResult(true, "Registro editado com sucesso", null);
         }
 
         public ICommandResult Handle(DeleteEquipmentCommand command)

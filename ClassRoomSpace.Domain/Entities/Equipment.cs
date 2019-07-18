@@ -11,11 +11,11 @@ namespace ClassRoomSpace.Domain.Entities
         public EEquipmentStatus Status { get; private set; }
         public DateTime PurchaseDate { get; private set; }
         
-        public Equipment(string description, DateTime purchaseDate)
+        public Equipment(string description)
         {
             Description = description;
             Status = EEquipmentStatus.Free;
-            PurchaseDate = purchaseDate;
+            PurchaseDate = DateTime.Now;
 
             AddNotifications(new ValidationContract()
                 .HasMinLen(Description, 2, "Description", "A descrição deve conter pelo menos 2 caracteres")

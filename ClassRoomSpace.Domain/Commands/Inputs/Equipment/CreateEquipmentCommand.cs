@@ -9,7 +9,7 @@ namespace ClassRoomSpace.Domain.Commands.Inputs.Equipment
         public Guid Id { get; set; }
         public string Description { get; set; }
         public EEquipmentStatus Status = EEquipmentStatus.Free;
-        public DateTime PurchaseDate { get; set; }
+        public DateTime PurchaseDate = DateTime.Now;
         public Guid IdCollege { get; set; }
     }
 }
