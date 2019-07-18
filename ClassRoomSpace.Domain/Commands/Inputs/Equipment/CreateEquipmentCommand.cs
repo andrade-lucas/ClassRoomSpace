@@ -1,14 +1,14 @@
 using System;
 using ClassRoomSpace.Domain.Enums;
+using ClassRoomSpace.Shared.Commands;
 
-namespace ClassRoomSpace.Domain.Queries.Equipment
+namespace ClassRoomSpace.Domain.Commands.Inputs.Equipment
 {
-    public class GetEquipmentById
+    public class CreateEquipmentCommand : ICommand
     {
         public Guid Id { get; set; }
         public string Description { get; set; }
         public EEquipmentStatus Status { get; set; }
         public DateTime PurchaseDate { get; set; }
-        public Guid IdCollege { get; set; }
     }
 }
