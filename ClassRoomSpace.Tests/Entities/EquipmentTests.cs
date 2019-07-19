@@ -34,5 +34,12 @@ namespace ClassRoomSpace.Tests.Entities
             _validEquipment.Book();
             Assert.AreEqual(EEquipmentStatus.Reserved, _validEquipment.Status);
         }
+
+        [TestMethod]
+        public void ShouldReturnValidWhenSetAsBroken()
+        {
+            _validEquipment.SetAsBroken();
+            Assert.AreEqual(EEquipmentStatus.Broken, _validEquipment.Status);
+        }
     }
 }

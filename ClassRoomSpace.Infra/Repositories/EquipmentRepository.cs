@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using ClassRoomSpace.Domain.Commands.Inputs.Equipment;
+using ClassRoomSpace.Domain.Entities;
 using ClassRoomSpace.Domain.Queries.Equipment;
 using ClassRoomSpace.Domain.Repositories;
 using ClassRoomSpace.Infra.Context;
@@ -17,6 +18,19 @@ namespace ClassRoomSpace.Infra.Repositories
         public EquipmentRepository(IDB db)
         {
             _db = db;
+        }
+
+        public void Book(Equipment equipment)
+        {
+            _db.Connection().Execute(
+                "spBookEquipment",
+                new
+                {
+                    id = equipment.Id,
+                    status = equipment.Status
+                },
+                commandType: CommandType.StoredProcedure
+            );
         }
 
         public void Create(CreateEquipmentCommand command)
@@ -77,6 +91,18 @@ namespace ClassRoomSpace.Infra.Repositories
             return _db.Connection().Query<GetEquipmentByIdQuery>(
                 "spGetEquipmentById",
                 new 
+                {
+                    id = id
+                },
+                commandType: CommandType.StoredProcedure
+            ).FirstOrDefault();
+        }
+
+        public int GetStatus(Guid id)
+        {
+            return _db.Connection().Query<int>(
+                "spGetEquipmentStatus",
+                new
                 {
                     id = id
                 },
