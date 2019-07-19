@@ -17,10 +17,16 @@ namespace ClassRoomSpace.Domain.Entities
             Status = EEquipmentStatus.Free;
             PurchaseDate = DateTime.Now;
 
-            AddNotifications(new ValidationContract()
-                .HasMinLen(Description, 2, "Description", "A descrição deve conter pelo menos 2 caracteres")
-                .HasMaxLen(Description, 100, "Description", "A descrição deve conter no máximo 100 caracteres")
-            );
+            Validate();       
+        }
+
+        public Equipment(string description, EEquipmentStatus status, DateTime purchaseDate)
+        {
+            Description = description;
+            Status = status;
+            PurchaseDate = purchaseDate;
+
+            Validate();
         }
 
         public void Book()
@@ -40,6 +46,14 @@ namespace ClassRoomSpace.Domain.Entities
         public override string ToString()
         {
             return Description;
+        }
+
+        private void Validate()
+        {
+            AddNotifications(new ValidationContract()
+                .HasMinLen(Description, 2, "Description", "A descrição deve conter pelo menos 2 caracteres")
+                .HasMaxLen(Description, 100, "Description", "A descrição deve conter no máximo 100 caracteres")
+            );
         }
     }
 }

@@ -1,6 +1,7 @@
 using ClassRoomSpace.Domain.Commands.Inputs.Equipment;
 using ClassRoomSpace.Domain.Commands.Outputs;
 using ClassRoomSpace.Domain.Entities;
+using ClassRoomSpace.Domain.Enums;
 using ClassRoomSpace.Domain.Repositories;
 using ClassRoomSpace.Shared.Commands;
 using FluentValidator;
@@ -8,7 +9,8 @@ using FluentValidator;
 namespace ClassRoomSpace.Domain.Commands.Handlers
 {
     public class EquipmentHandler : Notifiable, ICommandHandler<CreateEquipmentCommand>,
-        ICommandHandler<EditEquipmentCommand>, ICommandHandler<DeleteEquipmentCommand>
+        ICommandHandler<EditEquipmentCommand>, ICommandHandler<DeleteEquipmentCommand>, 
+        ICommandHandler<BookEquipmentCommand>
     {
         private readonly IEquipmentRepository _repository;
 
@@ -30,7 +32,7 @@ namespace ClassRoomSpace.Domain.Commands.Handlers
 
         public ICommandResult Handle(EditEquipmentCommand command)
         {
-            var equipment = new Equipment(command.Description);
+            var equipment = new Equipment(command.Description, command.Status, command.PurchaseDate);
             AddNotifications(equipment.Notifications);
 
             if (Invalid)
@@ -51,6 +53,24 @@ namespace ClassRoomSpace.Domain.Commands.Handlers
             
             _repository.Delete(command);
             return new CommandResult(true, "Registro deletado com sucesos", null);
+        }
+
+        public ICommandResult Handle(BookEquipmentCommand command)
+        {
+            var equipment = new Equipment(command.Description, command.Status, command.PurchaseDate);
+            AddNotifications(equipment.Notifications);
+
+            var status = (EEquipmentStatus)_repository.GetStatus(command.Id);
+            if (status != EEquipmentStatus.Free)
+                AddNotification("Book", "Equipamento indisponível para reserva");
+
+            equipment.Book();
+
+            if (Invalid)
+                return new CommandResult(false, "Erro ao efetuar reserva", Notifications);
+
+            _repository.Book(equipment);
+            return new CommandResult(true, "Reserva efetuada com sucesso", null);
         }
     }
 }
