@@ -15,6 +15,7 @@ namespace ClassRoomSpace.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddResponseCompression();
             services.AddMvc();
 
@@ -35,6 +36,12 @@ namespace ClassRoomSpace.Api
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            app.UseCors(x => {
+                x.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials()
+                    .AllowAnyOrigin();
+            });
             app.UseResponseCompression();
             app.UseMvc();
         }
