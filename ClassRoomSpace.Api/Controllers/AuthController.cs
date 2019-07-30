@@ -6,7 +6,6 @@ using ClassRoomSpace.Api.Configurations;
 using ClassRoomSpace.Domain.Commands.Handlers;
 using ClassRoomSpace.Domain.Commands.Inputs.Auth;
 using ClassRoomSpace.Domain.Repositories;
-using ClassRoomSpace.Shared.Commands;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -74,6 +73,13 @@ namespace ClassRoomSpace.Api.Controllers
                     message = "Falha ao autenticar"
                 };
             }
+        }
+
+        [HttpGet]
+        [Route("v1/auth/logout")]
+        public object Logout()
+        {
+            return null;
         }
     }
 }
