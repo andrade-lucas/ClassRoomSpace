@@ -5,10 +5,12 @@ using ClassRoomSpace.Domain.Commands.Inputs.User;
 using ClassRoomSpace.Domain.Queries.User;
 using ClassRoomSpace.Domain.Repositories;
 using ClassRoomSpace.Shared.Commands;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClassRoomSpace.Api.Controllers
 {
+    [Authorize("Bearer")]
     public class UsersController : Controller
     {
         private readonly IUserRepository _repository;

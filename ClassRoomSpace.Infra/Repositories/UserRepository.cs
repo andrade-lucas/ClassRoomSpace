@@ -103,14 +103,14 @@ namespace ClassRoomSpace.Infra.Repositories
             ).FirstOrDefault();
         }
 
-        public AuthUserQuery Login(AuthUserCommand command)
+        public AuthUserQuery Login(User user)
         {
             return _db.Connection().Query<AuthUserQuery>(
                 "spAuthUser",
                 new 
                 {
-                    email = command.Email,
-                    password = command.Password
+                    email = user.Email.Address,
+                    password = user.Password.Value
                 },
                 commandType: CommandType.StoredProcedure
             ).FirstOrDefault();

@@ -14,6 +14,12 @@ namespace ClassRoomSpace.Domain.Entities
         public EUserStatus Status { get; private set; }
         public string Image { get; private set; }
         
+        public User(Email email, Password password)
+        {
+            Email = email;
+            Password = password;
+        }
+
         public User(Name name, Document document, Email email, Password password, string phone, EUserStatus status, string image)
         {
             Name = name;
