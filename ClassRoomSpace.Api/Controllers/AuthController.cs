@@ -35,12 +35,16 @@ namespace ClassRoomSpace.Api.Controllers
             dynamic user = _handler.Handle(command);
             if (user.Status)
             {
+                string id = (string)user.Data.Id;
                 string name = (string)user.Data.Name;
+                string email = (string)user.Data.Email;
                 ClaimsIdentity identity = new ClaimsIdentity(
                     new GenericIdentity(name, "Name"),
                     new[] {
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                        new Claim(JwtRegisteredClaimNames.UniqueName, name)
+                        new Claim(JwtRegisteredClaimNames.NameId, id),
+                        new Claim(JwtRegisteredClaimNames.UniqueName, name),
+                        new Claim(JwtRegisteredClaimNames.Email, email)
                     }
                 );
                 DateTime createDate = DateTime.Now;
