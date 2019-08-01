@@ -9,7 +9,7 @@ namespace ClassRoomSpace.Tests.Mocks.Repositories
 {
     public class BlockRepositoryMock : IBlockRepository
     {
-        public void Create(Block block)
+        public void Create(CreateBlockCommand command)
         {
             
         }

@@ -5,10 +5,12 @@ using ClassRoomSpace.Domain.Commands.Inputs.Equipment;
 using ClassRoomSpace.Domain.Queries.Equipment;
 using ClassRoomSpace.Domain.Repositories;
 using ClassRoomSpace.Shared.Commands;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClassRoomSpace.Api.Controllers
 {
+    [Authorize("Bearer")]
     public class EquipmentsController : Controller
     {
         private readonly IEquipmentRepository _repository;

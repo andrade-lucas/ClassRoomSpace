@@ -26,7 +26,7 @@ namespace ClassRoomSpace.Domain.Entities
             Document = document;
             Email = email;
             Password = password;
-            Phone = phone;
+            Phone = phone.Replace("(", "").Replace(")", "").Replace("-", "").Trim();
             Status = status;
             Image = image;
         }

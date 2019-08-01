@@ -5,10 +5,12 @@ using ClassRoomSpace.Domain.Commands.Inputs.Block;
 using ClassRoomSpace.Domain.Queries.Block;
 using ClassRoomSpace.Domain.Repositories;
 using ClassRoomSpace.Shared.Commands;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClassRoomSpace.Api.Controllers
 {
+    [Authorize("Bearer")]
     public class BlocksController : Controller
     {
         private readonly IBlockRepository _repository;

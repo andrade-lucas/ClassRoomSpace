@@ -20,14 +20,15 @@ namespace ClassRoomSpace.Infra.Repositories
             _db = db;
         }
 
-        public void Create(Block block)
+        public void Create(CreateBlockCommand command)
         {
             _db.Connection().Execute(
                 "spCreateBlock",
                 new
                 {
-                    id = block.Id,
-                    description = block.Description
+                    id = command.Id,
+                    description = command.Description,
+                    idCollege = command.IdCollege
                 },
                 commandType: CommandType.StoredProcedure
             );

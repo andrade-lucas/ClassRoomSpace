@@ -9,7 +9,10 @@ namespace ClassRoomSpace.Domain.ValueObjects
 
         public Document(string number)
         {
-            Number = number ?? "";
+            if (number != null)
+                Number = number.Replace(".", "").Replace("-", "").Trim();
+            else
+                Number = "";
 
             if (Number.Replace(".", "").Replace("-", "").Trim().Length == 11)
             {

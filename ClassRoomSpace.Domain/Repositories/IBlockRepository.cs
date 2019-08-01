@@ -10,7 +10,7 @@ namespace ClassRoomSpace.Domain.Repositories
     {
         IEnumerable<GetBlocksQuery> Get();
         GetBlockByIdQuery GetById(Guid id);
-        void Create(Block block);
+        void Create(CreateBlockCommand command);
         void Edit(EditBlockCommand command);
         void Delete(DeleteBlockCommand command);
     }

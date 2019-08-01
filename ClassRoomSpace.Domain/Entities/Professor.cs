@@ -19,7 +19,7 @@ namespace ClassRoomSpace.Domain.Entities
             Document = document;
             Email = email;
             Course = course;
-            Phone = phone;
+            Phone = phone.Replace("(", "").Replace(")", "").Replace("-", "").Trim();
             Status = EProfessorStatus.Active;
 
             AddNotifications(Name.Notifications);

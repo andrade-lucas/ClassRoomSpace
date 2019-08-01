@@ -25,7 +25,7 @@ namespace ClassRoomSpace.Domain.Commands.Handlers
             if (Invalid)
                 return new CommandResult(false, "Erro ao cadastrar bloco", Notifications);
 
-            _repository.Create(block);
+            _repository.Create(command);
             return new CommandResult(true, "Bloco cadastrado com sucesso", null);
         }
 

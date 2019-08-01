@@ -25,7 +25,7 @@ namespace ClassRoomSpace.Domain.Entities
             Name = name;
             Document = document;
             Email = email;
-            Phone = phone;
+            Phone = phone.Replace("(", "").Replace(")", "").Replace("-", "").Trim();
             Image = image;
             _addresses = new List<Address>();
             _blocks = new List<Block>();

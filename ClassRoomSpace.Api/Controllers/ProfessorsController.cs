@@ -6,10 +6,12 @@ using ClassRoomSpace.Domain.Queries.Professor;
 using ClassRoomSpace.Domain.Repositories;
 using ClassRoomSpace.Domain.Services;
 using ClassRoomSpace.Shared.Commands;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClassRoomSpace.Api.Controllers
 {
+    [Authorize("Bearer")]
     public class ProfessorsController : Controller
     {
         private readonly IProfessorRepository _repository;

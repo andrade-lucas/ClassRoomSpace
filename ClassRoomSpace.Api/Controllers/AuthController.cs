@@ -35,7 +35,7 @@ namespace ClassRoomSpace.Api.Controllers
             dynamic user = _handler.Handle(command);
             if (user.Status)
             {
-                string id = (string)user.Data.Id;
+                string id = user.Data.Id.ToString();
                 string name = (string)user.Data.Name;
                 string email = (string)user.Data.Email;
                 ClaimsIdentity identity = new ClaimsIdentity(
@@ -62,19 +62,20 @@ namespace ClassRoomSpace.Api.Controllers
                 var token = handler.WriteToken(securityToken);
                 return new
                 {
-                    authenticated = true,
+                    status = true,
                     created = createDate.ToString("yyyy-MM-dd HH:mm:ss"),
                     expiration = expireDate.ToString("yyyy-MM-dd HH:mm:ss"),
                     accessToken = token,
-                    message = "OK"
+                    message = "Seja Bem-Vindo",
+                    user = user
                 };
             }
             else
             {
                 return new
                 {
-                    authenticated = false,
-                    message = "Falha ao autenticar"
+                    status = false,
+                    message = "Usuário não encontrado, por favor verifique se os dados estão corretos"
                 };
             }
         }
