@@ -38,12 +38,12 @@ namespace ClassRoomSpace.Api.Controllers
 
         [HttpPost]
         [Route("v1/classRooms")]
-        public ICommandResult Post(CreateClassRoomCommand command)
+        public ICommandResult Post([FromBody] CreateClassRoomCommand command)
         {
             return _handler.Handle(command);
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("v1/classRooms")]
         public ICommandResult Put(EditClassRoomCommand command)
         {

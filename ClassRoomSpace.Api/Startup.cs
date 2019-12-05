@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ClassRoomSpace.Api
 {
@@ -40,7 +41,12 @@ namespace ClassRoomSpace.Api
             services.AddTransient<IProfessorRepository, ProfessorRepository>();
             services.AddTransient<IClassRoomRepository, ClassRoomRepository>();
             services.AddTransient<IEquipmentRepository, EquipmentRepository>();
-            
+
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1", new Info { Title = "Classroom Space", Version = "v1" });
+            });
+
             var signingConfigurations = new SigningConfigurations();
             services.AddSingleton(signingConfigurations);
             var tokenConfigurations = new TokenConfigurations();
@@ -49,10 +55,12 @@ namespace ClassRoomSpace.Api
             ).Configure(tokenConfigurations);
             services.AddSingleton(tokenConfigurations);
 
-            services.AddAuthentication(authOptions => {
+            services.AddAuthentication(authOptions =>
+            {
                 authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(bearerOptions => {
+            }).AddJwtBearer(bearerOptions =>
+            {
                 var paramValidations = bearerOptions.TokenValidationParameters;
                 paramValidations.IssuerSigningKey = signingConfigurations.Key;
                 paramValidations.ValidAudience = tokenConfigurations.Audience;
@@ -78,7 +86,8 @@ namespace ClassRoomSpace.Api
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            app.UseCors(x => {
+            app.UseCors(x =>
+            {
                 x.AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()
@@ -86,6 +95,10 @@ namespace ClassRoomSpace.Api
             });
             app.UseResponseCompression();
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(x => {
+                x.SwaggerEndpoint("/swagger/v1/swagger.json", "ClassRoom Space");
+            });
         }
     }
 }

@@ -3,16 +3,17 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\"/>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App"/>
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.1.1"/>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassRoomSpace.Domain\ClassRoomSpace.Domain.csproj" />
-    <ProjectReference Include="..\ClassRoomSpace.Infra\ClassRoomSpace.Infra.csproj" />
-    <ProjectReference Include="..\ClassRoomSpace.Shared\ClassRoomSpace.Shared.csproj" />
+    <ProjectReference Include="..\ClassRoomSpace.Domain\ClassRoomSpace.Domain.csproj"/>
+    <ProjectReference Include="..\ClassRoomSpace.Infra\ClassRoomSpace.Infra.csproj"/>
+    <ProjectReference Include="..\ClassRoomSpace.Shared\ClassRoomSpace.Shared.csproj"/>
   </ItemGroup>
 </Project>
