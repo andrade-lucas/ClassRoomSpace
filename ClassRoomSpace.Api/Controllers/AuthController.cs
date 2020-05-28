@@ -5,7 +5,9 @@ using System.Security.Principal;
 using ClassRoomSpace.Api.Configurations;
 using ClassRoomSpace.Domain.Commands.Handlers;
 using ClassRoomSpace.Domain.Commands.Inputs.Auth;
+using ClassRoomSpace.Domain.Commands.Inputs.User;
 using ClassRoomSpace.Domain.Repositories;
+using ClassRoomSpace.Shared.Commands;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -16,6 +18,7 @@ namespace ClassRoomSpace.Api.Controllers
     {
         private readonly IUserRepository _repository;
         private readonly AuthHandler _handler;
+        private readonly UserHandler _userHandler;
         private readonly SigningConfigurations _signingConfigurations;
         private readonly TokenConfigurations _tokenConfigurations;
 
@@ -23,6 +26,7 @@ namespace ClassRoomSpace.Api.Controllers
         {
             _repository = repository;
             _handler = new AuthHandler(_repository);
+            _userHandler = new UserHandler(_repository);
             _signingConfigurations = signingConfigurations;
             _tokenConfigurations = tokenConfigurations;
         }
@@ -85,6 +89,13 @@ namespace ClassRoomSpace.Api.Controllers
         public object Logout()
         {
             return null;
+        }
+
+        [HttpPost]
+        [Route("v1/auth/create-user")]
+        public ICommandResult Post([FromBody] CreateUserCommand command)
+        {
+            return _userHandler.Handle(command);
         }
     }
 }
