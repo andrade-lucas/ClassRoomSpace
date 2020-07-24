@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ClassRoomSpace.Api.Controllers
 {
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
+    [AllowAnonymous]
     public class UsersController : Controller
     {
         private readonly IUserRepository _repository;
